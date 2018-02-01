@@ -1,9 +1,13 @@
 {
   "name": "meta-scraper",
   "scripts": {
+    "dev": "micro-dev",
+    "start": "micro",
+    "format": "prettier --print-width 80 --single-quote --tab-width=4 --trailing-comma=all --no-semi --no-bracket-spacing --write 'index.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "micro": "^9.1.0"
   },
   "devDependencies": {
