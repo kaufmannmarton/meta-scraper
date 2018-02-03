@@ -46,5 +46,7 @@ module.exports = async (request, response) => {
         data.icon = getIcon(url, icons[0].href)
     })
 
+    response.setHeader('Access-Control-Allow-Origin', '*')
+
     send(response, 200, data)
 }
