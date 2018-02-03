@@ -15,7 +15,7 @@ const getIcon = (url, iconHref) => {
         // Will throw an error if icon href is not a valid URL
         new URL(iconHref)
 
-        return (icon = iconHref)
+        return iconHref
     } catch (exception) {
         const hostname = new URL(url).hostname
 
