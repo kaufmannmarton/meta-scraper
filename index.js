@@ -17,13 +17,15 @@ const getIcon = (url, iconHref) => {
 
         return iconHref
     } catch (exception) {
-        const hostname = new URL(url).hostname
+        const resolvedUrl = new URL(url)
+        const protocol = resolvedUrl.protocol
+        const hostname = resolvedUrl.hostname
 
-        if (!iconHref.startsWith('/')) {
-            return `${hostname}/${iconHref}`
+        if (iconHref.startsWith('/')) {
+            iconHref = iconHref.substr(1)
         }
 
-        return hostname + iconHref
+        return `${protocol}//${hostname}/${iconHref}`
     }
 }
 
