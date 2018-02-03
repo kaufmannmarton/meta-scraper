@@ -2,7 +2,7 @@
   "name": "meta-scraper",
   "scripts": {
     "dev": "micro-dev",
-    "start": "micro",
+    "start": "micro -p $PORT",
     "format": "prettier --print-width 80 --single-quote --tab-width=4 --trailing-comma=all --no-semi --no-bracket-spacing --write 'index.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
