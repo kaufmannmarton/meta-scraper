@@ -2,6 +2,14 @@ const {URL} = require('url')
 const {send, json} = require('micro')
 const scrape = require('html-metadata')
 
+const getSiteName = metadata => {
+    if (metadata['openGraph'] && metadata['openGraph']['site_name']) {
+        return metadata['openGraph']['site_name']
+    }
+
+    return ''
+}
+
 const getKeywords = metadata => {
     if (metadata['jsonLd'] && metadata['jsonLd']['keywords']) {
         return metadata['jsonLd']['keywords']
@@ -46,6 +54,7 @@ module.exports = async (request, response) => {
         data.description = description
         data.keywords = getKeywords(metadata)
         data.icon = getIcon(url, icons[0].href)
+        data.site = getSiteName(metadata)
     })
 
     response.setHeader('Access-Control-Allow-Origin', '*')
