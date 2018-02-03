@@ -46,16 +46,18 @@ module.exports = async (request, response) => {
     const {url} = await json(request)
     const data = {}
 
-    await scrape(url, (error, metadata) => {
-        const {title, description, icons} = metadata['general']
-        const iconHref = icons[0].href
+    await scrape(url)
+        .then(metadata => {
+            const {title, description, icons} = metadata['general']
+            const iconHref = icons[0].href
 
-        data.title = title
-        data.description = description
-        data.keywords = getKeywords(metadata)
-        data.icon = getIcon(url, icons[0].href)
-        data.site = getSiteName(metadata)
-    })
+            data.title = title
+            data.description = description
+            data.keywords = getKeywords(metadata)
+            data.icon = getIcon(url, icons[0].href)
+            data.site = getSiteName(metadata)
+        })
+        .catch(error => console.log(error))
 
     response.setHeader('Access-Control-Allow-Origin', '*')
 
