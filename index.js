@@ -49,7 +49,6 @@ module.exports = async (request, response) => {
     await scrape(url)
         .then(metadata => {
             const {title, description, icons} = metadata['general']
-            const iconHref = icons[0].href
 
             data.title = title
             data.description = description
