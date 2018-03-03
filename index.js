@@ -12,13 +12,13 @@ const getSiteName = metadata => {
 
 const getKeywords = metadata => {
     if (metadata['jsonLd'] && metadata['jsonLd']['keywords']) {
-        const keywords = metadata['jsonLd']['keywords']
+        let keywords = metadata['jsonLd']['keywords']
 
-        if (Array.isArray(keywords)) {
-            return keywords
+        if (!Array.isArray(keywords)) {
+            keywords = keywords.split(',')
         }
 
-        return keywords.split(',').map(keyword => keyword.trim())
+        return keywords.map(keyword => keyword.trim())
     }
 
     return []
