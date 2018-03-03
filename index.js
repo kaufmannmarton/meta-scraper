@@ -2,18 +2,22 @@ const {URL} = require('url')
 const {send, json} = require('micro')
 const scrape = require('html-metadata')
 
-const getSiteName = metadata => {
-    if (metadata['openGraph'] && metadata['openGraph']['site_name']) {
-        return metadata['openGraph']['site_name']
+const getProperty = (object, properties) => {
+    const property = properties.shift()
+
+    if (!object[property]) {
+        return undefined
     }
 
-    return ''
+    return properties.length > 0
+        ? getProperty(object[property], properties)
+        : object[property]
 }
 
 const getKeywords = metadata => {
-    if (metadata['jsonLd'] && metadata['jsonLd']['keywords']) {
-        let keywords = metadata['jsonLd']['keywords']
+    let keywords = getProperty(metadata, ['jsonLd', 'keywords'])
 
+    if (keywords) {
         if (!Array.isArray(keywords)) {
             keywords = keywords.split(',')
         }
@@ -43,6 +47,15 @@ const getIcon = (url, iconHref) => {
     }
 }
 
+const getSiteName = metadata =>
+    getProperty(metadata, ['openGraph', 'site_name']) || ''
+
+const getCover = metadata =>
+    getProperty(metadata, ['openGraph', 'image', 'url']) || ''
+
+const getEmbedUrl = metadata =>
+    getProperty(metadata, ['twitter', 'player', 'url']) || ''
+
 module.exports = async (request, response) => {
     if ('POST' !== request.method) {
         send(response, 405)
@@ -61,6 +74,8 @@ module.exports = async (request, response) => {
             data.keywords = getKeywords(metadata)
             data.icon = getIcon(url, icons[0].href)
             data.site = getSiteName(metadata)
+            data.cover = getCover(metadata)
+            data.embedUrl = getEmbedUrl(metadata)
         })
         .catch(error => console.log(error))
 
