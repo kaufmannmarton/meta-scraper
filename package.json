@@ -1,13 +1,11 @@
 {
   "name": "meta-scraper",
+  "main": "index.js",
   "scripts": {
     "dev": "micro-dev",
     "start": "micro -p $PORT",
-    "format": "prettier --print-width 80 --single-quote --tab-width=4 --trailing-comma=all --no-semi --no-bracket-spacing --write 'index.js'",
+    "format": "prettier --no-editorconfig --write \"index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "engines": {
-    "node": "9.4.0"
   },
   "dependencies": {
     "html-metadata": "^1.7.0",
