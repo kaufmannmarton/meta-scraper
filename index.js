@@ -50,7 +50,7 @@ const getIcon = (url, iconHref) => {
 const getSiteName = metadata =>
     getProperty(metadata, ['openGraph', 'site_name']) || ''
 
-const getCover = metadata =>
+const getCoverUrl = metadata =>
     getProperty(metadata, ['openGraph', 'image', 'url']) || ''
 
 const getEmbedUrl = metadata =>
@@ -74,7 +74,7 @@ module.exports = async (request, response) => {
             data.keywords = getKeywords(metadata)
             data.icon = getIcon(url, icons[0].href)
             data.site = getSiteName(metadata)
-            data.cover = getCover(metadata)
+            data.coverUrl = getCoverUrl(metadata)
             data.embedUrl = getEmbedUrl(metadata)
         })
         .catch(error => console.log(error))
