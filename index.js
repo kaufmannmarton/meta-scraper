@@ -28,7 +28,7 @@ const getKeywords = metadata => {
     return []
 }
 
-const getIcon = (url, iconHref) => {
+const getIconUrl = (url, iconHref) => {
     try {
         // Will throw an error if icon href is not a valid URL
         new URL(iconHref)
@@ -72,8 +72,8 @@ module.exports = async (request, response) => {
             data.title = title
             data.description = description
             data.keywords = getKeywords(metadata)
-            data.icon = getIcon(url, icons[0].href)
             data.site = getSiteName(metadata)
+            data.iconUrl = getIconUrl(url, icons[0].href)
             data.coverUrl = getCoverUrl(metadata)
             data.embedUrl = getEmbedUrl(metadata)
         })
