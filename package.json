@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "micro-dev",
     "start": "micro -p $PORT",
-    "format": "prettier --no-editorconfig --write \"index.js\"",
+    "format": "prettier --write \"index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
