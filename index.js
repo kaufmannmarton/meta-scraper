@@ -9,9 +9,7 @@ const getProperty = (object, properties) => {
         return undefined
     }
 
-    return properties.length > 0
-        ? getProperty(object[property], properties)
-        : object[property]
+    return properties.length > 0 ? getProperty(object[property], properties) : object[property]
 }
 
 const getKeywords = metadata => {
@@ -47,14 +45,11 @@ const getIconUrl = (url, iconHref) => {
     }
 }
 
-const getSiteName = metadata =>
-    getProperty(metadata, ['openGraph', 'site_name']) || ''
+const getSiteName = metadata => getProperty(metadata, ['openGraph', 'site_name']) || ''
 
-const getCoverUrl = metadata =>
-    getProperty(metadata, ['openGraph', 'image', 'url']) || ''
+const getCoverUrl = metadata => getProperty(metadata, ['openGraph', 'image', 'url']) || ''
 
-const getEmbedUrl = metadata =>
-    getProperty(metadata, ['twitter', 'player', 'url']) || ''
+const getEmbedUrl = metadata => getProperty(metadata, ['twitter', 'player', 'url']) || ''
 
 module.exports = async (request, response) => {
     if ('POST' !== request.method) {
