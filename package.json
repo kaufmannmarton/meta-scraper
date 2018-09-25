@@ -3,7 +3,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "micro-dev",
-    "start": "micro -p $PORT",
+    "start": "micro -l tcp://0.0.0.0:$PORT",
     "format": "prettier --write \"index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
